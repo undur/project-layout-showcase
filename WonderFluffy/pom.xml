@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>wonderfluffy</groupId>
+	<artifactId>WonderFluffy</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>woapplication</packaging>
+
+	<properties>
+		<maven.compiler.release>25</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- Project Wonder, which brings ERFoundation 1.1, ERWebObjects and WebObjects -->
+		<dependency>
+			<groupId>wonder.core</groupId>
+			<artifactId>ERExtensions</artifactId>
+			<version>7.5-SNAPSHOT</version>
+		</dependency>
+		<!-- The project's layout in build.properties, for running from the project folder -->
+		<dependency>
+			<groupId>is.rebbi.slim</groupId>
+			<artifactId>ERProjectLayout</artifactId>
+			<version>8.0.14</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<sourceDirectory>Sources</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>is.rebbi</groupId>
+				<artifactId>vermilingua-maven-plugin</artifactId>
+				<version>1.1.11</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>wocommunity</id>
+			<url>https://maven.wocommunity.org/content/groups/public</url>
+		</repository>
+	</repositories>
+</project>

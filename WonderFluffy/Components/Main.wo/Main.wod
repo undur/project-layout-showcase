@@ -1,0 +1,22 @@
+Stylesheet : WOGenericElement {
+	elementName = "link";
+	rel = "stylesheet";
+	href = cssURL;
+}
+
+BundleClass : WOString {
+	value = bundleClass;
+}
+
+Greeting : WOString {
+	value = greeting;
+}
+
+Bump : WOHyperlink {
+	action = bump;
+	id = "bump";
+}
+
+Counter : WOString {
+	value = counter;
+}
