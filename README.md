@@ -1,17 +1,33 @@
 # ERProjectLayout showcase
 
-Three small WebObjects applications that use [ERProjectLayout](https://github.com/undur/wonder-slim/tree/master/ERProjectLayout) in development and are built with [vermilingua](https://github.com/undur/vermilingua-maven-plugin).
+Four small WebObjects applications that use [ERProjectLayout](https://github.com/undur/wonder-slim/tree/master/ERProjectLayout) in development and are built with [vermilingua](https://github.com/undur/vermilingua-maven-plugin).
 
 | Project | Framework | Layout |
 |---|---|---|
 | WonderFluffy | Project Wonder | "Fluffy Bunny": `Sources`, `Components`, `Resources`, `WebServerResources`, declared in `build.properties` |
 | WonderStandard | Project Wonder | the standard Maven layout: `src/main/java`, `src/main/components`, `src/main/woresources`, `src/main/webserver-resources` |
 | PlainWOStandard | Plain WebObjects, no Wonder | the standard Maven layout |
+| SimpleProject | wonder-slim | the standard Maven layout, with as little as possible |
 
 Each application's Main page shows the bundle NSBundle found for it (`ERXProjectLayoutBundle` when run in development,
 `NSLegacyBundle` when run as a built `.woa`), a value from its `Properties`, a stylesheet from its web server
 resources, and of course all using a component template. Seeing all four means the application initialized propertly,
 found its components, its WebObjects bundle resources and its web server resources.
+
+## SimpleProject
+
+A simple WO app that only has an `Application` class, `build.properties` and `pom.xml`, and a single `Main` component
+to show resource loading works fine. Works everywhere, no IDE files and no Eclipse required. Nothing reads `.project`, `.classpath` or `.settings`.
+Any IDE that runs `main()` with the Maven classpath, from the project folder, runs it in development.
+
+
+```
+pom.xml                                   ERExtensions, and vermilingua to build it
+build.properties                          project.name, project.type and principalClass
+src/main/java/simpleproject/Application.java   maps "/" to Main
+src/main/java/simpleproject/Main.java
+src/main/components/Main.wo/Main.html
+```
 
 ## How it's wired
 

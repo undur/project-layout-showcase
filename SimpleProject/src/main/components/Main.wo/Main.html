@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title><wo:str value="$application.name" /></title>
+		<style>
+			:root {
+				--bg: #f6f5f1;
+				--card: #ffffff;
+				--text: #1f2328;
+				--muted: #626a73;
+				--line: #e3e1da;
+				--accent: #3d7a4f;
+				--accent-soft: #e4f0e7;
+				--code-bg: #f1efe9;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--bg: #15171a;
+					--card: #1d2024;
+					--text: #e6e6e3;
+					--muted: #9aa1a9;
+					--line: #2e3238;
+					--accent: #7cc48f;
+					--accent-soft: #1f3326;
+					--code-bg: #262a2f;
+				}
+			}
+
+			* { box-sizing: border-box; }
+
+			body {
+				margin: 0;
+				padding: 48px 16px;
+				background: var(--bg);
+				color: var(--text);
+				font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+			}
+
+			main {
+				max-width: 720px;
+				margin: 0 auto;
+			}
+
+			header {
+				margin-bottom: 32px;
+			}
+
+			.badge {
+				display: inline-block;
+				padding: 2px 10px;
+				border-radius: 999px;
+				background: var(--accent-soft);
+				color: var(--accent);
+				font-size: 13px;
+				font-weight: 600;
+				letter-spacing: 0.02em;
+			}
+
+			h1 {
+				margin: 12px 0 4px;
+				font-size: 40px;
+				line-height: 1.15;
+				letter-spacing: -0.02em;
+			}
+
+			.lead {
+				margin: 0;
+				color: var(--muted);
+				font-size: 18px;
+			}
+
+			section {
+				background: var(--card);
+				border: 1px solid var(--line);
+				border-radius: 12px;
+				padding: 24px 28px;
+				margin-bottom: 20px;
+			}
+
+			section p {
+				margin: 0;
+			}
+
+			h2 {
+				margin: 0 0 12px;
+				font-size: 18px;
+			}
+
+			ol {
+				margin: 0;
+				padding-left: 22px;
+			}
+
+			li + li {
+				margin-top: 10px;
+			}
+
+			code {
+				font: 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+				background: var(--code-bg);
+				padding: 1px 6px;
+				border-radius: 5px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			td {
+				padding: 8px 0;
+				border-top: 1px solid var(--line);
+				vertical-align: top;
+			}
+
+			tr:first-child td {
+				border-top: none;
+			}
+
+			td:first-child {
+				padding-right: 20px;
+				white-space: nowrap;
+			}
+
+			td:last-child {
+				color: var(--muted);
+			}
+
+			footer {
+				margin-top: 28px;
+				color: var(--muted);
+				font-size: 14px;
+				text-align: center;
+			}
+
+			@media (max-width: 560px) {
+				h1 { font-size: 32px; }
+				section { padding: 20px; }
+				td { display: block; }
+				td:first-child { padding-bottom: 2px; }
+				td:last-child { border-top: none; padding-top: 0; }
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<header>
+				<wo:if condition="$application.isDevelopmentMode"><span class="badge">Running in development</span></wo:if>
+				<wo:if condition="$application.isDevelopmentMode" negate="$true"><span class="badge">Running as a built application</span></wo:if>
+				<h1>Hello from <wo:str value="$application.name" /></h1>
+				<p class="lead">A wonder-slim application with as little as possible: five files and one dependency.</p>
+			</header>
+
+			<section>
+				<h2>What just happened</h2>
+				<ol>
+					<li><code>Application.main()</code> started the application through <code>ERXApplication</code>.</li>
+					<li>
+						It found <code>build.properties</code> in the working directory, so it's running from its project
+						folder: development mode, with <code>NSProjectBundleEnabled</code> set. A built application runs
+						from inside its <code>.woa</code>, where there's no <code>build.properties</code>.
+					</li>
+					<li>
+						ERProjectLayout read <code>build.properties</code>, saw a project (it has <code>project.name</code>
+						and <code>project.type</code>), and found this component in <code>src/main/components</code>, the
+						standard place, since <code>build.properties</code> doesn't say otherwise.
+					</li>
+					<li>Your browser asked for <code>/</code>, which <code>Application</code> maps to <code>Main</code>.</li>
+					<li>
+						<code>Main</code> rendered this template, <code>Main.wo/Main.html</code>. The name above comes from an
+						inline binding, <code>&lt;wo:str value="$application.name" /&gt;</code>, and the badge from a
+						<code>&lt;wo:if&gt;</code> on <code>$application.isDevelopmentMode</code>.
+					</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>The whole project</h2>
+				<table>
+					<tr>
+						<td><code>pom.xml</code></td>
+						<td>One dependency, ERExtensions, which brings WebObjects along. vermilingua builds the <code>.woa</code>.</td>
+					</tr>
+					<tr>
+						<td><code>build.properties</code></td>
+						<td>What the project is: its name, that it's an application, and its principal class.</td>
+					</tr>
+					<tr>
+						<td><code>Application.java</code></td>
+						<td>Starts the application and maps <code>/</code> to <code>Main</code>.</td>
+					</tr>
+					<tr>
+						<td><code>Main.java</code></td>
+						<td>The component behind this page. It doesn't need to do anything.</td>
+					</tr>
+					<tr>
+						<td><code>Main.wo/Main.html</code></td>
+						<td>This page.</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<h2>No IDE required</h2>
+				<p>
+					There are no Eclipse files in the project: nothing reads <code>.project</code>, <code>.classpath</code>
+					or <code>.settings</code>. Any IDE that runs <code>main()</code> with the Maven classpath, from the
+					project folder, runs it in development, and <code>mvn package</code> builds a <code>.woa</code> to
+					deploy.
+				</p>
+			</section>
+
+			<footer>Built with wonder-slim and vermilingua</footer>
+		</main>
+	</body>
+</html>
