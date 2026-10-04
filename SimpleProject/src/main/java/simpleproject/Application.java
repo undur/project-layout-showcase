@@ -1,7 +1,7 @@
 package simpleproject;
 
 import er.extensions.appserver.ERXApplication;
-import er.extensions.routes.RouteTable;
+import er.extensions.routing.ERXRouter;
 
 public class Application extends ERXApplication {
 
@@ -10,6 +10,6 @@ public class Application extends ERXApplication {
 	}
 
 	public Application() {
-		RouteTable.defaultRouteTable().map( "/", Main.class );
+		ERXRouter.declare( routes -> routes.map( "/", Main.class ) );
 	}
 }
